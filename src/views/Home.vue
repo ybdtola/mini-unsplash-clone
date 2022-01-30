@@ -2,7 +2,7 @@
   <div class="searchContainer">
     <div v-if="searchField && !error">
         <div class="searchForm">
-          <span class="search" style="font-size: 12px; color:#A2AAB7; 
+          <span class="search" style="font-size: 12px; color:#a2aab7; 
           padding-left: 10px"><font-awesome-icon icon="search" /></span>
           <input type="search" placeholder="Search for photo" v-model="searchQuery" @keyup.enter="searchText">
         </div>
@@ -91,24 +91,32 @@ export default {
       isModalOpen.value = true;
 
       state.photo = snap;
+      document.body.style.overflowY = 'hidden';
     }
-
+    
     const closeModal = () => {
       isModalOpen.value = false;
+      document.body.style.overflowY = 'auto';
     }
 
-     const searchText = async (e) => {
-       isSearching.value = true;
-       searchField.value = false;
-       isLoading.value = true;
-      const {data}  = await axios.get(`/search/photos?query=${searchQuery.value}&client_id=${process.env.VUE_APP_API_KEY}&page=1&per_page=${perPage.value}`);
-       const {results} = data;
-       state.img = results;
-      searchField.value = false
-      convertFirstLetter()
-      isLoading.value = false;
-      isSearching.value = false;
-    }
+    const searchText = async () => {
+          isSearching.value = true;
+          searchField.value = false;
+          isLoading.value = true; 
+          await axios.get(`/search/photos?query=${searchQuery.value}&client_id=${process.env.VUE_APP_API_KEY}&page=1&per_page=${perPage.value}`)
+          .then(response => {
+              const {results} = response.data;
+              state.img = results;
+              searchField.value = false;
+              convertFirstLetter();
+              isLoading.value = false;
+              isSearching.value = false;
+          })
+          .catch(e => {
+              error.value = true;
+          })
+      }
+    
 
     const convertFirstLetter = () => {
       const searchConverter = searchQuery.value.charAt(0).toUpperCase() + searchQuery.value.slice(1);
@@ -195,23 +203,35 @@ input[type='search']{
     display: var(--use-grid);
     grid-gap: var(--gap);
     grid-template-columns: var(--masonry);
-    grid-template-rows: var(--gtr) var(--grid-max) var(--gtr);
+    grid-template-rows: var(--gtr) var(--grid-max) var(--gtt);
     grid-auto-flow: var(--reflow);
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family:Buckin-Medium;
-  font-size: 15px
+  font-family:var(--buck-med-font);
+  font-size: 0.9375rem;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  font-family: Buckin-Medium;
-  font-size: 15px
+  font-family: var(--buck-med-font);
+  font-size: 0.9375rem;
 }
-
 
 @media screen and (max-width: 768px){
   .grid{
-    padding-left: 50px;
-    padding-right: 50px;
+    grid-template-columns: var(--masonry-md);
+    grid-template-rows: var(--gtr-md) var(--gtr-md) var(--gtr-md);
+    padding-left: var(--pl);
+    padding-right: var(--pr);
+
+  }
+}
+
+@media screen and (max-width: 576px){
+  .grid{
+    grid-template-rows: var(--gtr-sm) var(--gtr-sm) var(--gtr-sm);
+    justify-content: center;
+  }
+  div.canvas{
+    height: 450px !important;
   }
 }
 </style>

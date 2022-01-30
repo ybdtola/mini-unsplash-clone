@@ -1,10 +1,4 @@
 <template>
-  <!-- <div id="nav">
-      <form>
-        <span class="search">⚫</span>
-        <input type="search" placeholder="Search" >
-      </form>
-  </div> -->
   <router-view/>
 </template>
 
