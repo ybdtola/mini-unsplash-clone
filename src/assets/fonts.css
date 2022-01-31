@@ -2,14 +2,17 @@
   font-display: auto;
   font-family: "Buckin-Regular";
   src: url("./fonts/Buckin-Regular.otf")  format("opentype");
+  font-display: block;
 }
 @font-face {
   font-display: auto;
   font-family: "Buckin-Medium";
   src: url("./fonts/Buckin-Medium.otf")  format("opentype");
+  font-display: block;
 }
 @font-face {
   font-display: auto;
     font-family: "Gordita-Medium";
     src: url("./fonts/Gordita-Medium.otf")  format("opentype");
+    font-display: block;
   }

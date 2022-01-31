@@ -22,6 +22,7 @@
   --gtr: 270px;
   --gtt: 280px;
   --gtr-sm: 450px;
+  --gtr-xs: 1fr;
   --use-flex: flex;
   --column-pos: center;
   --row-pos: center;

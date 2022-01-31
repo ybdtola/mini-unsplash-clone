@@ -116,7 +116,21 @@ $abs: absolute;
       grid-row: auto !important;
       grid-column: auto !important;
       height: 350px !important;
+      &:nth-child(5) {
+      margin-top: 0;
     }
+    }
+  }
+  @media screen and (max-width: 576px){
+    div.canvas{
+    &:nth-child(5) {
+      margin-top: 0;
+    }
+  }
+  .overlay{
+    height: 25%;
+    background: linear-gradient(transparent 0%, #000000);
+  }
   }
 
 </style>

@@ -4,7 +4,7 @@
         <div class="searchForm">
           <span class="search" style="font-size: 12px; color:#a2aab7; 
           padding-left: 10px"><font-awesome-icon icon="search" /></span>
-          <input type="search" placeholder="Search for photo" v-model="searchQuery" @keyup.enter="searchText">
+          <input type="search" placeholder="Search for photo" v-model="searchQuery" @keyup.enter="searchText" autofocus />
         </div>
     </div>
     <div v-else-if="isSearching">
@@ -227,11 +227,11 @@ input[type='search']{
 
 @media screen and (max-width: 576px){
   .grid{
-    grid-template-rows: var(--gtr-sm) var(--gtr-sm) var(--gtr-sm);
+    grid-template-rows: var(--gtr-xs) var(--gtr-xs) var(--gtr-xs);
     justify-content: center;
   }
   div.canvas{
-    height: 450px !important;
+    height: 350px !important;
   }
 }
 </style>
